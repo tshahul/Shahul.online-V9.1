@@ -17,3 +17,9 @@ prisma/*.db-journal
 *.tsbuildinfo
 
 prisma/*.db.backup
+.vercel
+
+.env.vercel
+maschema.prisma
+prisma/*.db.backup*
+prisma/schema.sqlite*.prisma

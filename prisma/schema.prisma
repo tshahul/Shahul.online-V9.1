@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model Setting {
@@ -45,33 +45,33 @@ model BlogPost {
 }
 
 model Experience {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   role        String
   company     String
   location    String
   startDate   String
   endDate     String?
   description String
-  sortOrder   Int    @default(0)
+  sortOrder   Int     @default(0)
 }
 
 model Skill {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   name      String
   category  String
-  level     Int    @default(80)
+  level     Int     @default(80)
   icon      String?
-  sortOrder Int    @default(0)
+  sortOrder Int     @default(0)
 }
 
 model Certification {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   name      String
   issuer    String
   year      String?
   image     String?
   url       String?
-  sortOrder Int    @default(0)
+  sortOrder Int     @default(0)
 }
 
 model ContactMessage {
@@ -120,17 +120,19 @@ model InnovationItem {
   updatedAt   DateTime @updatedAt
 }
 
-
 model HomepageSection {
   id         Int      @id @default(autoincrement())
   sectionKey String   @unique
-  eyebrow    String?
+  key        String?  @unique
   title      String
   subtitle   String?
+  eyebrow    String?
   content    String
   image      String?
-  sortOrder  Int      @default(0)
   published  Boolean  @default(true)
+  enabled    Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
 
@@ -140,7 +142,7 @@ model MediaAsset {
   url       String
   alt       String?
   mimeType  String
-  size      Int      @default(0)
+  size      Int
   createdAt DateTime @default(now())
 }
 

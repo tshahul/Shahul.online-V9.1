@@ -1,0 +1,4 @@
+import crypto from 'crypto';
+const secret=()=>process.env.AUTH_SECRET||'dev-secret-change-me';
+export function makeToken(){const email=process.env.ADMIN_EMAIL||'admin@shahul.online';const ts=Date.now().toString();const sig=crypto.createHmac('sha256',secret()).update(email+'|'+ts).digest('hex');return Buffer.from(email+'|'+ts+'|'+sig).toString('base64url')}
+export function validToken(token?:string){try{if(!token)return false;const raw=Buffer.from(token,'base64url').toString();const [email,ts,sig]=raw.split('|');if(!email||!ts||!sig||Date.now()-Number(ts)>86400000)return false;const expected=crypto.createHmac('sha256',secret()).update(email+'|'+ts).digest('hex');return email===(process.env.ADMIN_EMAIL||'admin@shahul.online')&&crypto.timingSafeEqual(Buffer.from(sig),Buffer.from(expected));}catch{return false}}

@@ -1,0 +1,156 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String
+  slug         String   @unique
+  excerpt      String
+  content      String
+  image        String?
+  technologies String
+  github       String?
+  liveUrl      String?
+  featured     Boolean  @default(false)
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model BlogPost {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String   @unique
+  excerpt   String
+  content   String
+  category  String
+  tags      String
+  image     String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Experience {
+  id          Int    @id @default(autoincrement())
+  role        String
+  company     String
+  location    String
+  startDate   String
+  endDate     String?
+  description String
+  sortOrder   Int    @default(0)
+}
+
+model Skill {
+  id        Int    @id @default(autoincrement())
+  name      String
+  category  String
+  level     Int    @default(80)
+  icon      String?
+  sortOrder Int    @default(0)
+}
+
+model Certification {
+  id        Int    @id @default(autoincrement())
+  name      String
+  issuer    String
+  year      String?
+  image     String?
+  url       String?
+  sortOrder Int    @default(0)
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
+
+model QuoteRequest {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  projectType String?
+  budget      String?
+  message     String
+  status      String   @default("NEW")
+  createdAt   DateTime @default(now())
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  icon        String?
+  published   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InnovationItem {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  icon        String?
+  published   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+model HomepageSection {
+  id         Int      @id @default(autoincrement())
+  sectionKey String   @unique
+  eyebrow    String?
+  title      String
+  subtitle   String?
+  content    String
+  image      String?
+  sortOrder  Int      @default(0)
+  published  Boolean  @default(true)
+  updatedAt  DateTime @updatedAt
+}
+
+model MediaAsset {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  url       String
+  alt       String?
+  mimeType  String
+  size      Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model SeoPage {
+  id          Int      @id @default(autoincrement())
+  pageKey     String   @unique
+  title       String
+  description String
+  keywords    String?
+  ogImage     String?
+  canonical   String?
+  updatedAt   DateTime @updatedAt
+}

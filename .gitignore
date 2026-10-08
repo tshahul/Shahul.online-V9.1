@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.env
+*.db
+*.db-journal
+npm-debug.log*
+node_modules/
+.next/
+.env
+.env.local
+.env.production
+.env.development
+prisma/dev.db
+prisma/*.db-journal

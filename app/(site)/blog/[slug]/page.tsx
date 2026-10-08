@@ -1,0 +1,3 @@
+import {db} from '@/lib/db'; import {notFound} from 'next/navigation'; import {PageHero} from '@/components/PageHero';
+export const dynamic='force-dynamic';
+export default async function Post({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=await db.blogPost.findUnique({where:{slug}});if(!p||!p.published)return notFound();return <><PageHero eyebrow={p.category} title={p.title} description={p.excerpt}/><main className="mx-auto max-w-4xl px-5 pb-20"><article className="glass rounded-3xl p-8 md:p-12 whitespace-pre-wrap leading-8 text-slate-300">{p.content}</article></main></>}

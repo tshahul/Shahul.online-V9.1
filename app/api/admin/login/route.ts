@@ -1,0 +1,2 @@
+import {cookies} from 'next/headers'; import {makeToken} from '@/lib/auth';
+export async function POST(req:Request){const {email,password}=await req.json();if(email!==process.env.ADMIN_EMAIL||password!==process.env.ADMIN_PASSWORD)return Response.json({error:'Invalid credentials'},{status:401});(await cookies()).set('shahul_admin',makeToken(),{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax',path:'/',maxAge:86400});return Response.json({ok:true})}
